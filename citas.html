@@ -1,0 +1,245 @@
+<html>
+
+<head>
+    <title>Citas medicas</title>
+    <link rel="icon" type="image/png" sizes="192x192" href="img/android-icon-192x192.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+    <script src="https://use.fontawesome.com/29af0824f6.js"></script>
+    <style>
+        .selected {
+            margin: 2%;
+            margin-left: 0%;
+            padding: 3px;
+            border-radius: 5px;
+            border-color: #398439;
+            background-color: #5cb85c;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <input type="hidden" id="id_eps">
+    <input type="hidden" id="id_contrato">
+    <input type="hidden" id="id_turno">
+    <input type="hidden" id="id_medico">
+    <input type="hidden" id="id_sede">
+    <input type="hidden" id="tipoCita" value="C">
+    <input type="hidden" id="oportunidad" value="3">
+    <input type="hidden" id="proximo" value="N">
+    <input type="hidden" id="cita" value="N">
+    <input type="hidden" id="usuario" value="64562681">
+    <input type="hidden" id="fecha_actual" value="2019-12-06">
+
+    <div>
+        <div class="container">
+            <h2><i class="fa fa-user-md" aria-hidden="true"></i>
+                Citas Medicas
+            </h2>
+            <hr>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-bordered table-condended">
+                        <thead>
+                            <tr>
+                                <th colspan="4" style="text-align: center;">Datos de usuario</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Nombre:</strong></td>
+                                <td id="nombre_usu"></td>
+                                <td><strong>Fecha de Nacimiento:</strong></td>
+                                <td id="nace_usu"></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Sexo:</strong></td>
+                                <td id="sexo_usu"></td>
+                                <td><strong>EPS:</strong></td>
+                                <td id="eps_usu"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class='row'>
+                <div class='col-md-12'>
+                    <div class='alert alert-info'>
+                        <p><strong>Proximas fechas con turnos disponibles para la sede y el Médico seleccionado</strong>
+                        </p>
+                        <ul id='oportunidad_'>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            1. Seleccionar Sede
+                        </div>
+                        <div class="panel-body" style="height: 20em;">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            2. Seleccionar Medico
+                        </div>
+                        <div class="panel-body">
+                            <div id="medicos" style="font-size: 12px;height: 20em;overflow-y: scroll">
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            3. Seleccionar fecha
+                        </div>
+                        <div class="panel-body" style="height: 20em;">
+                            <div id="calendar_div" style="padding-left: 10%; text-align: center;">
+                                <input type="date" readonly="" value="2019-12-08" class="form-control" id="dia"
+                                    style="display: none;">
+                            </div>
+                            <br>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th colspan="7" style="text-align:center">Diciembre 2019</th>
+                                    </tr>
+                                    <tr>
+                                        <th style="text-align:center">L</th>
+                                        <th style="text-align:center">M</th>
+                                        <th style="text-align:center">M</th>
+                                        <th style="text-align:center">J</th>
+                                        <th style="text-align:center">V</th>
+                                        <th style="text-align:center">S</th>
+                                        <th style="text-align:center">D</th>
+                                    </tr>
+                                    <tr></tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td><button class="btn btn-primary btn-block btn-xs" onclick="">1</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><button class="habil btn btn-default btn-block btn-xs" onclick="">2</button>
+                                        </td>
+                                        <td><button class="habil btn btn-default btn-block btn-xs" onclick="">3</button>
+                                        </td>
+                                        <td><button class="habil btn btn-default btn-block btn-xs" onclick="">4</button>
+                                        </td>
+                                        <td><button class="habil btn btn-default btn-block btn-xs" onclick="">5</button>
+                                        </td>
+                                        <td><button class="habil btn btn-default btn-block btn-xs" onclick="">6</button>
+                                        </td>
+                                        <td><button class="btn btn-primary btn-block btn-xs" onclick="">7</button></td>
+                                        <td><button class="btn btn-primary btn-block btn-xs" onclick="">8</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><button class="habil btn btn-default btn-block btn-xs"
+                                                onclick="escojer(this)">9</button></td>
+                                        <td><button class="habil btn btn-default btn-block btn-xs"
+                                                onclick="escojer(this)">10</button></td>
+                                        <td><button class="habil btn btn-default btn-block btn-xs"
+                                                onclick="escojer(this)">11</button></td>
+                                        <td><button class="habil btn btn-default btn-block btn-xs"
+                                                onclick="escojer(this)">12</button></td>
+                                        <td><button class="habil btn btn-default btn-block btn-xs"
+                                                onclick="escojer(this)">13</button></td>
+                                        <td><button class="btn btn-primary btn-block btn-xs" onclick="">14</button></td>
+                                        <td><button class="btn btn-primary btn-block btn-xs" onclick="">15</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><button class="habil btn btn-default btn-block btn-xs"
+                                                onclick="escojer(this)">16</button></td>
+                                        <td><button class="habil btn btn-default btn-block btn-xs"
+                                                onclick="escojer(this)">17</button></td>
+                                        <td><button class="habil btn btn-default btn-block btn-xs"
+                                                onclick="escojer(this)">18</button></td>
+                                        <td><button class="habil btn btn-default btn-block btn-xs"
+                                                onclick="escojer(this)">19</button></td>
+                                        <td><button class="habil btn btn-default btn-block btn-xs"
+                                                onclick="escojer(this)">20</button></td>
+                                        <td><button class="btn btn-primary btn-block btn-xs" onclick="">21</button></td>
+                                        <td><button class="btn btn-primary btn-block btn-xs" onclick="">22</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><button class="habil btn btn-default btn-block btn-xs"
+                                                onclick="escojer(this)">23</button></td>
+                                        <td><button class="habil btn btn-default btn-block btn-xs"
+                                                onclick="escojer(this)">24</button></td>
+                                        <td><button class="btn btn-primary btn-block btn-xs" onclick="">25</button></td>
+                                        <td><button class="habil btn btn-default btn-block btn-xs"
+                                                onclick="escojer(this)">26</button></td>
+                                        <td><button class="habil btn btn-default btn-block btn-xs"
+                                                onclick="escojer(this)">27</button></td>
+                                        <td><button class="btn btn-primary btn-block btn-xs" onclick="">28</button></td>
+                                        <td><button class="btn btn-primary btn-block btn-xs" onclick="">29</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><button class="habil btn btn-default btn-block btn-xs"
+                                                onclick="escojer(this)">30</button></td>
+                                        <td><button class="habil btn btn-default btn-block btn-xs"
+                                                onclick="escojer(this)">31</button></td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div>
+                                <button class="btn btn-primary btn-xs">&nbsp;&nbsp;</button>
+                                Festivos
+                                <button class="btn btn-default btn-xs">&nbsp;&nbsp;</button>
+                                Habiles<br>
+                                <button class="btn btn-success btn-xs">&nbsp;&nbsp;</button>
+                                seleccionado
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" name="_token" value="5lMvx8uziJY2IEhj8QLSER7nNNLnR0K3FwX52WZh">
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            4. Seleccionar Turno
+                        </div>
+                        <div class="panel-body">
+                            <div id="turnos" style="overflow-y: scroll;height: 18em;">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <button class="btn btn-success btn-block" id="enviar">Aceptar</button>
+                    <a href="tipos de consulta.html"><button class="btn btn-default btn-block">Regresar</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
